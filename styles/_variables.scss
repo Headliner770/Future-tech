@@ -1,4 +1,4 @@
-@use "helpers" as *;
+@use "./helpers" as *;
 
 :root {
   --color-light: #ffffff;
@@ -17,8 +17,8 @@
 
   --gradient: linear-gradient(
     45deg,
-    var(--color-dark-15) 64%,
-    var(--color-accent) 136%
+    var(--color-dark-15) 50%,
+    var(--color-accent) 135%
   );
 
   --border: #{rem(1)} solid var(--color-dark-15);
