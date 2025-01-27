@@ -1,4 +1,4 @@
-@use "./helpers" as *;
+@use "helpers" as *;
 
 .container {
   max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
@@ -19,5 +19,45 @@
 .visible-mobile {
   @include mobile-above {
     display: none !important;
+  }
+}
+
+.full-vw-line {
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: calc((var(--100vw) - var(--container-width)) / 2);
+    height: rem(1);
+    background-color: var(--color-dark-15);
+  }
+
+  &--top {
+    &::before {
+      content: "";
+      bottom: 100%;
+    }
+  }
+
+  &--bottom {
+    &::after {
+      content: "";
+      top: 100%;
+    }
+  }
+
+  &--left {
+    &::before,
+    &::after {
+      right: 100%;
+    }
+  }
+
+  &--right {
+    &::before,
+    &::after {
+      left: 100%;
+    }
   }
 }
