@@ -116,10 +116,7 @@ class Tabs {
       return;
     }
 
-    // action?.();
-    // this.updateUI();
-
-    if (action) {
+     if (action) {
         action()
         this.updateUI()
     }
