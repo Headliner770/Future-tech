@@ -1,8 +1,10 @@
 @use "../helpers" as *;
 
 .card {
-  display: grid;
-  grid-template-columns: 37.5% auto;
+  @include tablet-above {
+    display: grid;
+    grid-template-columns: 37.5% auto;
+  }
 
   &__preview,
   &__body {
@@ -19,11 +21,15 @@
     justify-content: center;
     row-gap: fluid(60, 20);
     padding-left: 0;
-    border-right: var(--border);
+
+    @include tablet-above {
+      border-right: var(--border);
+    }
 
     @include tablet {
       padding-right: 0;
       padding-block: rem(50);
+      border-bottom: var(--border);
     }
 
     &-main {
@@ -34,6 +40,11 @@
     &-icon {
       width: fluid(80, 50);
     }
+
+    &-info {
+      display: grid;
+      row-gap: fluid(16, 6);
+    }
   }
 
   &__body {
@@ -42,5 +53,25 @@
     @include tablet {
       padding: rem(30) rem(16);
     }
+  }
+
+  &-grid {
+    display: grid;
+
+    &--2-cols {
+      grid-template-columns: repeat(2, 1fr);
+      gap: fluid(30, 10);
+
+      @include mobile {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &__cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    row-gap: fluid(20, 4);
   }
 }

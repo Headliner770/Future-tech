@@ -1,7 +1,7 @@
 @use "../helpers" as *;
 
 .section {
-  &&__header {
+  &__header {
     padding-block: fluid(120, 40);
     background-color: var(--color-dark-10);
 
