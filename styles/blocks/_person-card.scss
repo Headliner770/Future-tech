@@ -1,4 +1,4 @@
-@use '../helpers' as *;
+@use "../helpers" as *;
 
 .person-card {
   --imageSize: #{rem(80)};
@@ -15,6 +15,10 @@
     width: var(--imageSize);
     background-color: var(--color-dark-15);
     border-radius: 50%;
+
+    @include laptop {
+      width: rem(60);
+    }
   }
 
   &__body {
