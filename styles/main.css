@@ -1794,10 +1794,4 @@ button[aria-label]::before {
   font-weight: 600;
 }
 
-.header,
-main > *:not(:last-child),
-.footer {
-  display: none !important;
-}
-
 /*# sourceMappingURL=main.css.map */
