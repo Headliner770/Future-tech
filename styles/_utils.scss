@@ -1,4 +1,4 @@
-@use 'helpers' as *;
+@use "helpers" as *;
 
 .container {
   max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
@@ -28,23 +28,21 @@
   &::before,
   &::after {
     position: absolute;
-    width: calc(
-      (var(--100vw) - var(--container-width)) / 2
-    );
+    width: calc((var(--100vw) - var(--container-width)) / 2);
     height: rem(1);
     background-color: var(--color-dark-15);
   }
 
   &--top {
     &::before {
-      content: '';
+      content: "";
       bottom: 100%;
     }
   }
 
   &--bottom {
     &::after {
-      content: '';
+      content: "";
       top: 100%;
     }
   }
@@ -85,10 +83,9 @@
     @include square(var(--circleSize));
     @include abs-y;
 
-    content: '';
+    content: "";
     right: 0;
-    background:
-      url('../../icons/arrow-top-right_black.svg') center no-repeat
+    background: url("../../icons/arrow-top-right_black.svg") center no-repeat
       var(--color-accent);
     border-radius: 50%;
   }
