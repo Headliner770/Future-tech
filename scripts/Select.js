@@ -42,17 +42,17 @@ class Select extends BaseComponent {
     this.dropdownElement = this.rootElement.querySelector(
       this.selectors.dropdown
     );
-    this.optionElement = this.dropdownElement.querySelectorAll(
+    this.optionElements = this.dropdownElement.querySelectorAll(
       this.selectors.option
     );
     this.state = this.getProxyState({
       ...this.initialState,
       currentOptionIndex: this.originalControlElement.selectedIndex,
       selectedOptionElement:
-        this.optionElement[this.originalControlElement.selectedIndex],
+        this.optionElements[this.originalControlElement.selectedIndex],
     });
     this.fixDropdownPosition();
-    this.updateTabIndex();
+    this.updateTabIndexes();
     this.bindEvents();
   }
 
@@ -90,7 +90,7 @@ class Select extends BaseComponent {
     };
 
     const updateOptions = () => {
-      this.optionElement.forEach((optionElement, index) => {
+      this.optionElements.forEach((optionElement, index) => {
         const isCurrent = currentOptionIndex === index;
         const isSelected = selectedOptionElement === optionElement;
 
@@ -124,9 +124,9 @@ class Select extends BaseComponent {
     this.state.isExpanded = false;
   }
 
-  fixDropdownPosition(isMobileDevice = MatchMedia.mobile.matches) {
-    const viewporWidth = document.documentElement.clientWidth;
-    const halfViewportX = viewporWidth / 2;
+  fixDropdownPosition() {
+    const viewportWidth = document.documentElement.clientWidth;
+    const halfViewportX = viewportWidth / 2;
     const { width, x } = this.buttonElement.getBoundingClientRect();
     const buttonCenterX = x + width / 2;
     const isButtonOnTheLeftViewportSide = buttonCenterX < halfViewportX;
@@ -142,12 +142,12 @@ class Select extends BaseComponent {
     );
   }
 
-  updateTabIndex() {
+  updateTabIndexes(isMobileDevice = MatchMedia.mobile.matches) {
     this.originalControlElement.tabIndex = isMobileDevice ? 0 : -1;
     this.buttonElement.tabIndex = isMobileDevice ? -1 : 0;
   }
 
-  isNeedToExpand() {
+  get isNeedToExpand() {
     const isButtonFocused = document.activeElement === this.buttonElement;
 
     return !this.state.isExpanded && isButtonFocused;
@@ -177,9 +177,11 @@ class Select extends BaseComponent {
     const isOptionClick = target.matches(this.selectors.option);
 
     if (isOptionClick) {
-      this.state.selectedOptionElement = targetthis.state.currentOptionIndex = [
-        ...this.optionElement,
-      ].findIndex((optionElement) => optionElement === target);
+      this.state.selectedOptionElement = target;
+      this.state.currentOptionIndex = [...this.optionElements].findIndex(
+        (optionElement) => optionElement === target
+      );
+      this.collapse();
     }
   };
 
@@ -242,12 +244,12 @@ class Select extends BaseComponent {
   };
 
   onMobileMatchMediaChange = (event) => {
-    this.updateTabIndex(event.matches);
+    this.updateTabIndexes(event.matches);
   };
 
   onOriginalControlChange = () => {
     this.state.selectedOptionElement =
-      this.optionElement[this.originalControlElement.selectedIndex];
+      this.optionElements[this.originalControlElement.selectedIndex];
   };
 
   bindEvents() {

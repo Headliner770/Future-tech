@@ -108,14 +108,12 @@ class Tabs extends BaseComponent {
     const isMacHomeKey = metaKey && code === "ArrowLeft";
     if (isMacHomeKey) {
       this.firstTab();
-
       return;
     }
 
-    const isMacEnd = metaKey && code === "ArrowRight";
-    if (isMacHomeKey) {
+    const isMacEndKey = metaKey && code === "ArrowRight";
+    if (isMacEndKey) {
       this.lastTab();
-
       return;
     }
 

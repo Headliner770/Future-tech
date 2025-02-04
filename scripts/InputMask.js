@@ -7,11 +7,12 @@ class InputMask {
   }
 
   init() {
-    const isLiReady = typeof window.IMask !== "undefined";
-    window.Imask(this.rootElement, {
-      mask: this.rootElement.dataset.jsInputMask,
-    });
-    if (isLiReady) {
+    const isLibReady = typeof window.IMask !== "undefined";
+
+    if (isLibReady) {
+      window.IMask(this.rootElement, {
+        mask: this.rootElement.dataset.jsInputMask,
+      });
     } else {
       console.error('Библиотека "imask" не подключена!');
     }
